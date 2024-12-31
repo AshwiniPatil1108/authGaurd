@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row mb-4">
+        <div class="col text-right">
+            <button
+            routerLink="addUser"
+            class="btn btn-sm btn-outline-info">
+                Add User
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item"
+                [ngClass]="{
+                    active :selectedUsrId === user.userId
+                }"
+                (click)="onUserSelect(user)"
+                [routerLink]="[user.userId]"
+                [queryParams]="{userRole : user.userRole}"
+                *ngFor="let user of usersInfo"
+                >
+                {{user.userName}}
+               </li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    
+    </div>

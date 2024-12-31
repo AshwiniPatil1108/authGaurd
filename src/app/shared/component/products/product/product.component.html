@@ -1,0 +1,25 @@
+
+<ng-container *ngIf="productObj; else noProd">
+  
+<p>
+    This is Product{{productId}} <strong>{{productObj.pname}}
+        
+    </strong> with status <strong>{{productObj.pstatus}}</strong>
+</p>
+    <button 
+    routerLink="edit"
+    [queryParamsHandling]="'preserve'"
+    mat-raised-button color="primary">Edit Product</button>
+
+    <button 
+   (click)="onProductRemove()"
+    mat-raised-button color="warn" class="ml-3">Remove Product</button>
+
+</ng-container>
+
+<ng-template #noProd>
+<p class="alert alert-info">No Product!!</p>
+</ng-template>
+
+
+

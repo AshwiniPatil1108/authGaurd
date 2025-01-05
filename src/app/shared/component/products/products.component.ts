@@ -16,15 +16,29 @@ export class ProductsComponent implements OnInit {
     private _productService : ProductsService,//5 
     private _route : ActivatedRoute,
     private _router : Router
-  ) { }
+  ) { 
+    console.log('Product compp constructor')
+    console.log(this._route);
+    this._route.data
+      .subscribe(res=>{
+        console.log(res['productData']);
+        this.products =res['productData'];
+        this.selectedProdId = this.products[0].pid;
+        this._router.navigate([this.products[0].pid],{
+        relativeTo: this._route,
+        queryParams :{canReturn :this.products[0].canReturn}
+        })
+      })
+  }
 
   ngOnInit(): void {
-    this.products = this._productService.fetchAllProducts()//6 go to hml to check
-    this.selectedProdId = this.products[0].pid;
-    this._router.navigate([this.products[0].pid],{
-      relativeTo: this._route,
-      queryParams :{canReturn :this.products[0].canReturn}
-    })
+    console.log('Product comp oninit')
+    // this.products = this._productService.fetchAllProducts()//6 go to hml to check
+    // this.selectedProdId = this.products[0].pid;
+    // this._router.navigate([this.products[0].pid],{
+    //   relativeTo: this._route,
+    //   queryParams :{canReturn :this.products[0].canReturn}
+    // })
     
   }
 

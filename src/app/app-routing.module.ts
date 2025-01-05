@@ -11,20 +11,35 @@ import { FairsComponent } from "./shared/component/fairs/fairs.component";
 import { FairDetailComponent } from "./shared/component/fairs/fair-detail/fair-detail.component";
 import { PageNotFoundComponent } from "./shared/component/page-not-found/page-not-found.component";
 import { NgModule } from "@angular/core";
+import { AuthGaurd } from "./shared/service/auth.gaurd";
+import { UserRoleGuard } from "./shared/service/user-role.guard";
+import { CompDeactivateGuard } from "./shared/service/comp-deactivate.guard";
+import { AdminDashboardComponent } from "./shared/component/admin-dashboard/admin-dashboard.component";
+import { ProductResolverService } from "./shared/service/productResolver.service";
 
 const appRoutes:Routes = [
     {
         path:'',
         component:AuthComponent
-       
+      
     },
     {
         path:'home',
-        component:HomeComponent
+        component:HomeComponent,
+        canActivate:[AuthGaurd, UserRoleGuard],
+        title:"DashBoard",
+        data : {
+            userRoles :["ADMIN", "BUYER", "SUPER_ADMIN"]
+        }
     },
     {
         path:'users',
         component:UsersComponent,
+        canActivate:[AuthGaurd, UserRoleGuard],
+        title:"users",
+        data : {
+            userRoles :["ADMIN", "SUPER_ADMIN"]
+        },
         children :[
             {
                 path:'addUser',
@@ -43,18 +58,27 @@ const appRoutes:Routes = [
     {
         path:'products',
         component:ProductsComponent,
+        canActivate:[AuthGaurd, UserRoleGuard],
+        title:"products",
+        data : {
+            userRoles :["ADMIN", "BUYER", "SUPER_ADMIN"]
+        },
+         resolve:{productData:ProductResolverService},
         children:[
             {
                 path:'addProduct',
-                component:ProdutFormComponent
+                component:ProdutFormComponent,
+                
             },
             {
                 path:':productId',
-                component:ProductComponent
+                component:ProductComponent,
+                 resolve :{productObj : ProductResolverService}
             },
             {
                 path:':productId/edit',
-                component:ProdutFormComponent
+                component:ProdutFormComponent,
+                canDeactivate:[CompDeactivateGuard ]
             },
         ]
     },
@@ -62,17 +86,36 @@ const appRoutes:Routes = [
     {
         path:'fairs',
         component:FairsComponent,
-       
+        canActivateChild:[AuthGaurd, UserRoleGuard],
+        title:'fairs',
+        data : {
+            userRoles :["ADMIN", "BUYER", "SUPER_ADMIN"]
+        },
         children :[
             {
                 path:':fairId',
-                component : FairDetailComponent
+                component : FairDetailComponent,
+             
             }
         ]
     },
     {
+        path:'admin',
+        component:AdminDashboardComponent,
+        title:'Admins',
+        canActivate:[AuthGaurd],
+        data : {
+            userRoles :["SUPER_ADMIN"]
+        },
+    },
+    {
         path:'page-not-found',
-        component:PageNotFoundComponent
+        component:PageNotFoundComponent,
+        canActivate:[AuthGaurd],
+        title:'page-not-found',
+        data:{
+            msg :`Page not Found (using Static Data of routing!!!!)`
+        }
     },
     {
         path:'**',

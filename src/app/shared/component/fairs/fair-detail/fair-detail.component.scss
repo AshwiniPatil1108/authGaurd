@@ -1,0 +1,14 @@
+.banner{
+    height: 350px;
+    overflow: hidden;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    figcaption{
+        position: absolute;
+        bottom: 10%;
+        padding-left: 40px;
+    }
+}

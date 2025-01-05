@@ -19,6 +19,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FairCardComponent } from './shared/component/fairs/fair-card/fair-card.component';
+import { AdminDashboardComponent } from './shared/component/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FairCardComponent } from './shared/component/fairs/fair-card/fair-card.
     UserFormComponent,
     ProductComponent,
     ProdutFormComponent,
-    FairCardComponent 
+    FairCardComponent,
+    AdminDashboardComponent 
   ],
   imports: [
     BrowserModule,

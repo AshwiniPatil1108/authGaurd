@@ -4,9 +4,9 @@
 <div class="row">
     <div class="col-md-4">
         <app-fair-card 
-       
+       [selectedFairId]="selectedFairId"
        (click)="selectedFairId = fairs.fairId"
-        
+        [fairObj]="fairs"
         *ngFor="let fairs of fairsArr"></app-fair-card>
     </div>
     <div class="col-md-8">

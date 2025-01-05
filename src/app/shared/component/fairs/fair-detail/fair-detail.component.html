@@ -1,1 +1,23 @@
-<p>fair-detail works!</p>
+<div class="fair">
+    <figure
+     class="banner">
+        <figcaption class="text-white font-weight-bold">
+            <h3 class="mb-1">
+            {{fairObj.fairName}}
+            </h3>
+            <p class="mb-1">
+               Event Type : {{fairObj.type}}
+            </p>
+            <p class="mb-1">
+                Registration DeadLine :{{((fairObj.startDate * 1000) - 86400000)}}
+            </p>
+        </figcaption>
+    </figure>
+    <p [innerHTML]="fairObj.candidateDescription" class="mb-4">
+       
+    </p>
+
+    <p [innerHTML]="fairObj.schoolDescription" class="mb-4">
+       
+    </p>
+</div>

@@ -1,1 +1,54 @@
-<p>auth works!</p>
+<div class="main">
+    <div class="card">
+        <div class="card-body">
+            <!-- loginform -->
+             <ng-container *ngIf="allReadyHasAccount">
+                <h2>Log in</h2>
+                <form 
+                (ngSubmit)="onLogin()"  
+                [formGroup]="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" class="form-control" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" id="password" class="form-control" formControlName="password">
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-block">LogIn</button>
+                </form>
+               
+             </ng-container>
+            <!-- signUpform -->
+             <ng-container *ngIf="!allReadyHasAccount">
+                <h2>Sign up </h2>
+                <form 
+                (ngSubmit)="onSignup()"  
+                [formGroup]="signUpForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" class="form-control" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" id="password" class="form-control" formControlName="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword ">Confirm Password </label>
+                        <input type="text" id="confirmPassword " class="form-control" 
+                        formControlName="confirmPassword ">
+                    </div>
+                    <button class="btn btn-primary btn-sm btn-block">Sign up</button>
+                </form>
+              
+             </ng-container>
+             
+             <hr>
+             <a href="javascript:;" 
+             (click)="allReadyHasAccount = !allReadyHasAccount"
+             class="btn btn-link">
+            {{allReadyHasAccount ? 'Dont Have Account?' : 'Already Have Account'}}
+            </a>
+        </div>
+    </div>
+</div>

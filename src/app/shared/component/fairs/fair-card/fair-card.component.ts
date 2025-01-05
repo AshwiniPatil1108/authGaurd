@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Ifairs } from 'src/app/shared/model/fairs';
 
 @Component({
   selector: 'app-fair-card',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fair-card.component.scss']
 })
 export class FairCardComponent implements OnInit {
-
+@Input() fairObj! : Ifairs
+@Input() selectedFairId !: string
   constructor() { }
 
   ngOnInit(): void {
